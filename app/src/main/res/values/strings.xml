@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">easyget</string>
+    <string name="login_google_label">Ingresar con Google</string>
+    <string name="login_email_label">Ingresar con correo</string>
+    <string name="signout_label">Salir</string>
+    <string name="email_label">Ingresar correo electrónico</string>
+    <string name="password_label">Ingresar contraseña</string>
+    <string name="login_label">Ingresar</string>
+</resources>
