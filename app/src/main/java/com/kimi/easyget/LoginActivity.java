@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -16,13 +17,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.kimi.easyget.utils.AlertMessage;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
+    private static final String SPACE_DELIMITER = " ";
     private FirebaseAuth firebaseAuth;
     private GoogleSignInClient googleSignInClient;
+    private SwipeRefreshLayout swipeLoading;
+    private AlertMessage alertMessage;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        alertMessage = AlertMessage.getInstance();
 
         setWidgets();
     }//onCreate
@@ -60,7 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "firebaseAuthWithGoogle:" + googleSignInAccount.getId());
                 firebaseAuthWithGoogle(googleSignInAccount.getIdToken());
             } catch (ApiException e) {
-                Log.w(TAG, "Google sign in failed", e);
+                switchLoading(false);
+                alertMessage.show(this, getString(R.string.oh), String.join(SPACE_DELIMITER, getString(R.string.bad_message), e.getMessage()));
             }
         }
     }
@@ -68,7 +75,14 @@ public class LoginActivity extends AppCompatActivity {
     private void setWidgets() {
         final Button btnGoogle = findViewById(R.id.btn_google_auth);
         final Button btnEmailAuth = findViewById(R.id.btn_email_auth);
-        btnGoogle.setOnClickListener(view -> signIn());
+        swipeLoading = findViewById(R.id.swipe_social_login);
+        swipeLoading.setEnabled(false);
+        swipeLoading.setColorSchemeColors(getColor(R.color.white), getColor(R.color.colorAccent));
+        swipeLoading.setProgressBackgroundColorSchemeColor(getColor(R.color.colorPrimary));
+        btnGoogle.setOnClickListener(view -> {
+            switchLoading(true);
+            signIn();
+        });
         btnEmailAuth.setOnClickListener(view -> goToEmailAuth());
     }
 
@@ -88,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
+                        switchLoading(false);
                         goToMainActivity();
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -99,5 +114,10 @@ public class LoginActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, MainActivity.class);
         finishAffinity();
         startActivity(intent);
+    }
+
+    private void switchLoading(final Boolean flag) {
+        swipeLoading.setEnabled(flag);
+        swipeLoading.setRefreshing(flag);
     }
 }

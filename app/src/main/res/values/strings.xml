@@ -6,4 +6,15 @@
     <string name="email_label">Ingresar correo electrónico</string>
     <string name="password_label">Ingresar contraseña</string>
     <string name="login_label">Ingresar</string>
+    <string name="create_account_label">CREAR CUENTA</string>
+    <string name="name_label_hint">Nombre</string>
+    <string name="last_name_label_hint">Apellido</string>
+    <string name="email_label_hint">Email</string>
+    <string name="password_label_hint">Contraseña</string>
+    <string name="password_confirm_label_hint">Confirmar contraseña</string>
+    <string name="disclaimer">Al continuar implica que has leido y aceptas los  Terminos de servicio y Politica de Privacidad</string>
+    <string name="no_account_label">¿Aun no tienes cuenta ?</string>
+    <string name="close_label">Cerrar</string>
+    <string name="oh">Oh!</string>
+    <string name="bad_message">Algo salió mal, referencia: </string>
 </resources>

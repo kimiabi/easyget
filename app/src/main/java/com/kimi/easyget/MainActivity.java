@@ -2,6 +2,7 @@ package com.kimi.easyget;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView nameUser = findViewById(R.id.name_user);
         final TextView emailUser = findViewById(R.id.email_user);
         final Button btnSignOut = findViewById(R.id.btn_signout);
+
 
         if (user != null) {
             Glide.with(this).load(user.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(photoUser);
