@@ -17,4 +17,6 @@
     <string name="close_label">Cerrar</string>
     <string name="oh">Oh!</string>
     <string name="bad_message">Algo salió mal, referencia: </string>
+    <string name="invalid_mail">Formato de correo invalido</string>
+    <string name="invalid_password">Minimo 6 caracteres y sin espacios!</string>
 </resources>

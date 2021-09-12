@@ -14,11 +14,11 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="textInputRounder" parent="TextAppearance.AppCompat">
+    <style name="textInputRounder" parent="Widget.Design.TextInputLayout">
         <item name="android:textColorHint">@color/gris_sof</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/red</item>
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>
@@ -39,5 +39,11 @@
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="TextLabel" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColor">@color/red</item> <!--apply the color you wat here -->
+        <item name="android:textSize">12dp</item>
+    </style>
+
 
 </resources>
